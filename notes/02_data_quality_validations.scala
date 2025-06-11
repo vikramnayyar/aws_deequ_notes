@@ -64,3 +64,21 @@ val valDf = result.checkResults.toSeq.flatMap {  case (check, checkResult) =>   
                 }.toDf("check_description", "constraint", "status", "message") 
 
 
+// Write df to adls
+/*
+// 1. Define output path in ADLS Gen2
+val outputPath = "abfss://my-container@my-storage.dfs.core.windows.net/data-quality-results/"
+
+// 2. (Optional) Set up authentication if you're NOT using Databricks or a managed identity
+spark.conf.set("fs.azure.account.auth.type.my-storage.dfs.core.windows.net", "OAuth")
+spark.conf.set("fs.azure.account.oauth.provider.type.my-storage.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
+spark.conf.set("fs.azure.account.oauth2.client.id.my-storage.dfs.core.windows.net", "<your-client-id>")
+spark.conf.set("fs.azure.account.oauth2.client.secret.my-storage.dfs.core.windows.net", "<your-client-secret>")
+spark.conf.set("fs.azure.account.oauth2.client.endpoint.my-storage.dfs.core.windows.net", "https://login.microsoftonline.com/<your-tenant-id>/oauth2/token")
+
+// 3. Write the DataFrame to ADLS
+valDf.write
+  .mode("overwrite") // use "append" if you want to keep adding to the folder
+  .parquet(outputPath)
+*/
+
