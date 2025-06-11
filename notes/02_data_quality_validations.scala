@@ -52,11 +52,11 @@ val result = VerificationSuite()
 // Add Results in Dataframe
 import spark.implicits_
 
-val valDf = result.checkResults.toSeq.flatMap {  case (check, checkResult) => 
-                checkResult.constraintResults.map { cr => 
+val valDf = result.checkResults.toSeq.flatMap {  case (check, checkResult) =>           // result.checkResults.item()
+                checkResult.constraintResults.map { cr =>                       
                                               (
-                                                check.description,
-                                                cr.constraint.toString,
+                                                check.description,                              // check is class
+                                                cr.constraint.toString,                        // cr is class
                                                 cr.status.toString,
                                                 cr.message.getOrElse("None")
                                               )                            
