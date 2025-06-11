@@ -50,7 +50,7 @@ val result = VerificationSuite()
 
 
 // Add Results in Dataframe
-import aprk.implicits_
+import spark.implicits_
 
 val valDf = result.checkResults.toSeq.flatMap {  case (check, checkResult) => 
                 checkResult.constraintMap.map { cr => 
