@@ -53,7 +53,7 @@ val result = VerificationSuite()
 import spark.implicits_
 
 val valDf = result.checkResults.toSeq.flatMap {  case (check, checkResult) => 
-                checkResult.constraintMap.map { cr => 
+                checkResult.constraintResults.map { cr => 
                                               (
                                                 check.description,
                                                 cr.constraint.toString,
