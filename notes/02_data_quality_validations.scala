@@ -41,7 +41,26 @@ val check = Check(CheckLevel.Error, "Data Quality Checks")
   // 8. Conditional boolean check
   .satisfies("taxes_included = false", "US Taxes Check", Some("country = 'US'"))        // US Taxes Check is the label for Check, mandatory for .satisfies(), and not available in in built checks
 
-val verificationResult = VerificationSuite()
+
+// Run declared Validations on data 
+val result = VerificationSuite()
   .onData(data)
   .addCheck(check)
   .run()
+
+
+// Add Results in Dataframe
+import aprk.implicits_
+
+val valDf = result.checkResults.toSeq.flatMap {  case (check, checkResult) => 
+                checkResult.constraintMap.map { cr => 
+                                              (
+                                                check.description,
+                                                cr.constraint.toString,
+                                                cr.status.toString,
+                                                cr.message.getOrElse("None")
+                                              )                            
+                                            }
+                }.toDf("check_description", "constraint", "status", "message") 
+
+
